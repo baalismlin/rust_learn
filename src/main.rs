@@ -1,4 +1,36 @@
 fn main() {
+  let s: &str = "abs";
+  let ss = &s;
+  println!("{}", s);
+  println!("{}", *ss);
+}
+
+fn first_word(s: &str) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+
+fn ownership() {
+  
+  let s = "123";
+  let s1 = "123";
+  if &s == &s1 {
+    println!("true");
+  }
+
+  let s2 = String::from("value");
+
+  drop(s2);
+}
+
+fn datatype() {
   let mut x: u32 = 4;
   println!("The value of x is: {x}");
 
@@ -32,7 +64,6 @@ fn main() {
   println!("{result}");
 
   loop_function();
-
 }
 
 fn another_function(input: i32) -> i32 {
