@@ -1,8 +1,86 @@
+use std::fmt::Display;
+
 fn main() {
-  let s: &str = "abs";
-  let ss = &s;
-  println!("{}", s);
-  println!("{}", *ss);
+  rectangle();
+}
+
+struct Rectangle {
+  width: u32,
+  height: u32,
+}
+
+impl Rectangle {
+  fn area(&mut self) -> u32 {
+    self.width += 10;
+    self.width * self.height
+  }
+
+  fn can_hole(&self, other: &Rectangle) -> bool {
+    self.width > other.width && self.height > other.height
+  }
+
+  fn square(size: u32) -> Self {
+    Self {
+      width: size,
+      height: size,
+    }
+  }
+}
+
+fn rectangle() {
+  let mut rec = Rectangle {
+    width: 123,
+    height: 10
+  };
+  let area = dbg!(rec.area());
+  println!("area {}", area);
+
+
+  let rec2 = Rectangle {
+    width: 10,
+    height: 20,
+  };
+
+  println!("{}", rec.can_hole(&rec2));
+}
+
+
+struct Color(i32, i32, i32);
+#[derive(Debug)]
+struct Point(String, i32, i32);
+
+#[derive(Debug)]
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+impl Display for User {
+    
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "user name: {}", self.username)
+    }
+}
+
+
+fn struct_function(email: String, username: String) -> User {
+  let user1 = User {
+        active: true,
+        username,
+        email,
+        sign_in_count: 1,
+    };
+
+    let user2 = User {
+      active: false,
+      ..user1
+    };
+
+    // println!("{user1:?}");
+
+    user2
 }
 
 fn first_word(s: &str) -> usize {
